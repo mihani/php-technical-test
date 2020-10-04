@@ -15,6 +15,10 @@ class TripFactory
             DurationUtils::convertToSecond($trip->getDuration())
         );
 
+        if ($averageSpeed < 1){
+            $averageSpeed = 1;
+        }
+
         $trip->setAveragePace(TripUtils::calculateAveragePace($averageSpeed));
         $trip->setAverageSpeed($averageSpeed);
 

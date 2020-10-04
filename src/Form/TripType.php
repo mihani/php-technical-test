@@ -39,6 +39,7 @@ class TripType extends AbstractType
                 'attr' => ['class' => 'form-control py-4'],
             ])
             ->add('comment', TextareaType::class, [
+                'required' => false,
                 'attr' => ['class' => 'form-control py-4'],
             ])
             ->add('type', EntityType::class, [

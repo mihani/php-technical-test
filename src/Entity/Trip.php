@@ -2,20 +2,36 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\TripRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass=TripRepository::class)
+ * @ApiResource()
  */
 class Trip
 {
     /**
+     * @var int
+     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @ApiProperty(identifier=false)
      */
     private $id;
+
+    /**
+     * @var Uuid
+     *
+     * @ApiProperty(identifier=true)
+     * @ORM\Column(type="uuid", unique=true)
+     */
+    public $code;
 
     /**
      * @ORM\Column(type="datetime")
@@ -58,6 +74,11 @@ class Trip
      * @ORM\Column(type="string", nullable=true)
      */
     private $averagePace;
+
+    public function __construct()
+    {
+        $this->code = Uuid::uuid4();
+    }
 
     public function getId(): ?int
     {
@@ -156,6 +177,18 @@ class Trip
     public function setAveragePace(?string $averagePace): self
     {
         $this->averagePace = $averagePace;
+
+        return $this;
+    }
+
+    public function getCode(): UuidInterface
+    {
+        return $this->code;
+    }
+
+    public function setCode(UuidInterface $code): self
+    {
+        $this->code = $code;
 
         return $this;
     }

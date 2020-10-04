@@ -2,16 +2,23 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @ApiResource(
+ *     collectionOperations={},
+ *     itemOperations={"get"={"method"="GET"}}
+ * )
  */
 class User implements UserInterface
 {
@@ -19,8 +26,17 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @ApiProperty(identifier=false)
      */
     private $id;
+
+    /**
+     * @var Uuid
+     *
+     * @ApiProperty(identifier=true)
+     * @ORM\Column(type="uuid", unique=true)
+     */
+    public $code;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -51,6 +67,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->trips = new ArrayCollection();
+        $this->code = Uuid::uuid4();
     }
 
     public function getId(): ?int

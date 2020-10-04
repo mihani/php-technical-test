@@ -103,7 +103,7 @@ class TripController extends AbstractController
         if($trip->getUser() !== $this->getUser()){
             return $this->redirectToRoute('trip_index');
         }
-        
+
         if ($this->isCsrfTokenValid('delete'.$trip->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($trip);
