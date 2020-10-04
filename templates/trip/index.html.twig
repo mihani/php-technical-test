@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trips{% endblock %}
+
+{% block body %}
+<h1 class="mt-4">Trips</h1>
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Begin Date</th>
+                        <th>Duration</th>
+                        <th>Distance</th>
+                        <th>Average Speed</th>
+                        <th>Average Pace</th>
+                        <th>Trip Type</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for trip in trips %}
+                    <tr>
+                        <td>{{ trip.beginDate|date('Y-m-d H:i:s') }}</td>
+                        <td>{{ trip.duration.hours }} h {{ trip.duration.minutes }} m {{ trip.duration.seconds }} s</td>
+                        <td>{{ trip.distance }} m</td>
+                        <td>{{ trip.averageSpeed }} km/h</td>
+                        <td>{{ trip.averagePace }}/km</td>
+                        <td>{{ trip.type.name }}</td>
+                        <td>
+                            <a class="btn btn-primary" href="{{ path('trip_show', {'id': trip.id}) }}">Show</a>
+                            <a class="btn btn-primary" href="{{ path('trip_edit', {'id': trip.id}) }}">Edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">No records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a class="btn btn-success" href="{{ path('trip_new') }}">Create new</a>
+    </div>
+</div>
+
+
+{% endblock %}

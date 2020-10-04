@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trip{% endblock %}
+
+{% block body %}
+<h1 class="mt-4">Trip</h1>
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <th>Begin Date</th>
+                        <td>{{ trip.beginDate|date('Y-m-d H:i:s') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Duration</th>
+                        <td>{{ trip.duration.hours }} h {{ trip.duration.minutes }} m {{ trip.duration.seconds }} s</td>
+                    </tr>
+                    <tr>
+                        <th>Distance</th>
+                        <td>{{ trip.distance }}</td>
+                    </tr>
+                    <tr>
+                        <th>Average Speed</th>
+                        <td>{{ trip.averageSpeed }}</td>
+                    </tr>
+                    <tr>
+                        <th>Average Pace</th>
+                        <td>{{ trip.averagePace }}</td>
+                    </tr>
+                    <tr>
+                        <th>Trip Type</th>
+                        <td>{{ trip.type.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Comment</th>
+                        <td>{{ trip.comment }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a class="btn btn-done" href="{{ path('trip_index') }}"><i class="fas fa-chevron-left"></i> Back to list</a>
+        <a class="btn btn-outline-primary" href="{{ path('trip_edit', {'id': trip.id}) }}">Edit</a>
+    </div>
+</div>
+{{ include('trip/_delete_form.html.twig') }}
+{% endblock %}

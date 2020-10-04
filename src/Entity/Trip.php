@@ -18,12 +18,12 @@ class Trip
     private $id;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $beginDate;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="array")
      */
     private $duration;
 
@@ -49,6 +49,16 @@ class Trip
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $averageSpeed;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $averagePace;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,19 +69,19 @@ class Trip
         return $this->beginDate;
     }
 
-    public function setBeginDate(?\DateTimeInterface $beginDate): self
+    public function setBeginDate(\DateTimeInterface $beginDate): self
     {
         $this->beginDate = $beginDate;
 
         return $this;
     }
 
-    public function getDuration(): ?\DateTimeInterface
+    public function getDuration(): ?array
     {
         return $this->duration;
     }
 
-    public function setDuration(?\DateTimeInterface $duration): self
+    public function setDuration(array $duration): self
     {
         $this->duration = $duration;
 
@@ -122,6 +132,30 @@ class Trip
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getAverageSpeed(): ?float
+    {
+        return $this->averageSpeed;
+    }
+
+    public function setAverageSpeed(?float $averageSpeed): self
+    {
+        $this->averageSpeed = $averageSpeed;
+
+        return $this;
+    }
+
+    public function getAveragePace(): ?string
+    {
+        return $this->averagePace;
+    }
+
+    public function setAveragePace(?string $averagePace): self
+    {
+        $this->averagePace = $averagePace;
 
         return $this;
     }
