@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20201004173937 extends AbstractMigration
+final class Version20201004180304 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -20,14 +20,12 @@ final class Version20201004173937 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE trip ADD code CHAR(36) NOT NULL COMMENT \'(DC2Type:uuid)\'');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_7656F53B77153098 ON trip (code)');
+        $this->addSql('INSERT INTO trip_type(name) VALUES (\'Training\'),(\'Run\'),(\'Fun\')');
     }
 
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP INDEX UNIQ_7656F53B77153098 ON trip');
-        $this->addSql('ALTER TABLE trip DROP code');
+
     }
 }
