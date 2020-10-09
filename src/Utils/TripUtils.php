@@ -13,9 +13,9 @@ class TripUtils
 
     public static function calculateAveragePace(float $speed): string
     {
-        $pace = intval(60/$speed);
+        $pace = (int) 60/$speed;
         $decimalPace = 60 % $speed;
 
-        return sprintf('%s\'%s"', $pace, $decimalPace);
+        return sprintf('%d\'%d"', $pace, $decimalPace);
     }
 }

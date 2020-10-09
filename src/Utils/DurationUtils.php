@@ -6,14 +6,11 @@ class DurationUtils
 {
     private const SECOND_CONVERT_UNIT = 3600;
 
-    /**
-     * @return float|int
-     */
-    public static function convertToSecond(array $duration)
+    public static function convertToSecond(array $duration): int
     {
-        $durationInSecond = $duration['seconds'];
-        $durationInSecond += $duration['minutes']*60;
-        $durationInSecond += $duration['hours']*self::SECOND_CONVERT_UNIT;
+        $durationInSecond = (int) $duration['seconds'];
+        $durationInSecond += (int) $duration['minutes']*60;
+        $durationInSecond += (int) $duration['hours']*self::SECOND_CONVERT_UNIT;
 
         return $durationInSecond;
     }
