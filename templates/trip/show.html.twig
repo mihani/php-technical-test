@@ -15,7 +15,7 @@
                     </tr>
                     <tr>
                         <th>Duration</th>
-                        <td>{{ trip.duration.hours }} h {{ trip.duration.minutes }} m {{ trip.duration.seconds }} s</td>
+                        <td>{{ trip.duration|date('H:i:s') }}</td>
                     </tr>
                     <tr>
                         <th>Distance</th>

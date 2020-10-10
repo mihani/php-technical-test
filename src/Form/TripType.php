@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Trip;
 use App\Entity\User;
+use App\Form\DataTransformer\DateIntervalArrayToSecondTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
@@ -16,6 +17,13 @@ use App\Entity\TripType as TripTypeEntity;
 
 class TripType extends AbstractType
 {
+    private $dateIntervalArrayToSecondTransformer;
+
+    public function __construct(DateIntervalArrayToSecondTransformer $dateIntervalArrayToSecondTransformer)
+    {
+        $this->dateIntervalArrayToSecondTransformer = $dateIntervalArrayToSecondTransformer;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -48,6 +56,9 @@ class TripType extends AbstractType
                 'attr' => ['class' => 'form-control']
             ])
         ;
+
+        $builder->get('duration')
+            ->addModelTransformer($this->dateIntervalArrayToSecondTransformer);
     }
 
     public function configureOptions(OptionsResolver $resolver)

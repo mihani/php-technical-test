@@ -12,13 +12,8 @@ class TripFactoryTest extends TestCase
     {
         $tripFactory = new TripFactory();
 
-        $duration = [
-            'hours' => 0,
-            'minutes' => 30,
-            'seconds' => 0
-        ];
-
         $distance = 2000;
+        $duration = 1800;
 
         $referenceTrip = (new Trip())
             ->setDuration($duration)
@@ -40,12 +35,7 @@ class TripFactoryTest extends TestCase
     {
         $tripFactory = new TripFactory();
 
-        $duration = [
-            'hours' => 0,
-            'minutes' => 50,
-            'seconds' => 0
-        ];
-
+        $duration = 3000;
         $distance = 2000;
 
         $referenceTrip = (new Trip())

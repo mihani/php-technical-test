@@ -23,7 +23,7 @@
                 {% for trip in trips %}
                     <tr>
                         <td>{{ trip.beginDate|date('Y-m-d H:i:s') }}</td>
-                        <td>{{ trip.duration.hours }} h {{ trip.duration.minutes }} m {{ trip.duration.seconds }} s</td>
+                        <td>{{ trip.duration|date('H:i:s') }}</td>
                         <td>{{ trip.distance }} m</td>
                         <td>{{ trip.averageSpeed }} km/h</td>
                         <td>{{ trip.averagePace }} /km</td>

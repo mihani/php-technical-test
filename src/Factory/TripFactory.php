@@ -3,7 +3,6 @@
 namespace App\Factory;
 
 use App\Entity\Trip;
-use App\Utils\DurationUtils;
 use App\Utils\TripUtils;
 
 class TripFactory
@@ -12,7 +11,7 @@ class TripFactory
     {
         $averageSpeed = TripUtils::calculateAverageSpeed(
             $trip->getDistance(),
-            DurationUtils::convertToSecond($trip->getDuration())
+            $trip->getDuration()
         );
 
         if ($averageSpeed < 1){

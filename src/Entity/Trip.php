@@ -16,64 +16,60 @@ use Ramsey\Uuid\UuidInterface;
 class Trip
 {
     /**
-     * @var int
-     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * @ApiProperty(identifier=false)
      */
-    private $id;
+    private int $id;
 
     /**
-     * @var Uuid
-     *
      * @ApiProperty(identifier=true)
      * @ORM\Column(type="uuid", unique=true)
      */
-    public $code;
+    public UuidInterface $code;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $beginDate;
-
-    /**
-     * @ORM\Column(type="array")
-     */
-    private $duration;
+    private \DateTime $beginDate;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $distance;
+    private int $duration;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private int $distance;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $comment;
+    private ?string $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity=TripType::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $type;
+    private TripType $type;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="trips")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private User $user;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $averageSpeed;
+    private ?float $averageSpeed;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $averagePace;
+    private ?string $averagePace;
 
     public function __construct()
     {
@@ -85,24 +81,24 @@ class Trip
         return $this->id;
     }
 
-    public function getBeginDate(): ?\DateTimeInterface
+    public function getBeginDate(): ?\DateTime
     {
         return $this->beginDate;
     }
 
-    public function setBeginDate(\DateTimeInterface $beginDate): self
+    public function setBeginDate(\DateTime $beginDate): self
     {
         $this->beginDate = $beginDate;
 
         return $this;
     }
 
-    public function getDuration(): ?array
+    public function getDuration(): ?int
     {
         return $this->duration;
     }
 
-    public function setDuration(array $duration): self
+    public function setDuration(int $duration): self
     {
         $this->duration = $duration;
 
@@ -138,7 +134,7 @@ class Trip
         return $this->type;
     }
 
-    public function setType(?TripType $type): self
+    public function setType(TripType $type): self
     {
         $this->type = $type;
 
@@ -150,7 +146,7 @@ class Trip
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(User $user): self
     {
         $this->user = $user;
 
